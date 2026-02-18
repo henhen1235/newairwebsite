@@ -2,12 +2,218 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Programs - AI Rethought</title>
+    <title>AIR x OSU - AI Rethought</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="icon" href="./images/favicon.png" type="image/x-icon">
     <link href="./css/navbar.css" rel="stylesheet">
     <link href="./css/homepage.css" rel="stylesheet">
-    <link href="./css/programs.css" rel="stylesheet">
+    <style>
+        /* ── Page base ── */
+        .osu-page {
+            padding-top: 72px; /* clear fixed navbar */
+        }
+
+        /* ── Hero ── */
+        .osu-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1040 50%, #0f172a 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 7rem 3rem 6rem;
+            text-align: center;
+        }
+        .osu-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 25% 60%, rgba(139,92,246,0.15) 0%, transparent 55%),
+                radial-gradient(circle at 75% 40%, rgba(220,90,60,0.12) 0%, transparent 55%);
+            pointer-events: none;
+        }
+        .osu-hero-inner {
+            position: relative;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .osu-hero-badge {
+            display: inline-block;
+            background: rgba(139,92,246,0.18);
+            border: 1px solid rgba(139,92,246,0.4);
+            color: #c4b5fd;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.35rem 1rem;
+            border-radius: 999px;
+            margin-bottom: 1.75rem;
+        }
+        .osu-hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            font-weight: 800;
+            line-height: 1.15;
+            color: #f1f5f9;
+            margin-bottom: 1.5rem;
+        }
+        .osu-hero-title .highlight-purple {
+            background: linear-gradient(90deg, #a78bfa, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .osu-hero-title .highlight-orange {
+            background: linear-gradient(90deg, #fb923c, #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .osu-hero-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .osu-hero-divider span {
+            height: 1px;
+            width: 60px;
+            background: rgba(255,255,255,0.15);
+            display: block;
+        }
+        .osu-hero-divider em {
+            font-style: normal;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        .osu-hero-subtitle {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            max-width: 620px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ── Two-column section ── */
+        .osu-collab {
+            background-color: #0f172a;
+            padding: 6rem 3rem;
+        }
+        .osu-collab-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .osu-collab-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .osu-collab-header h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 0.75rem;
+        }
+        .osu-collab-header h2 span {
+            background: linear-gradient(90deg, #a78bfa, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .osu-collab-header p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        .osu-collab-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            .osu-collab-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .osu-collab-image {
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid rgba(139,92,246,0.15);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .osu-collab-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .osu-collab-image-placeholder {
+            color: #334155;
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 2rem;
+        }
+        .osu-collab-text h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 1rem;
+        }
+        .osu-collab-text p {
+            color: #94a3b8;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 0.97rem;
+        }
+
+        /* ── Sign-up section ── */
+        .osu-signup {
+            background: linear-gradient(135deg, #1e1040 0%, #0f172a 100%);
+            border-top: 1px solid rgba(139,92,246,0.2);
+            padding: 5rem 3rem;
+            text-align: center;
+        }
+        .osu-signup-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .osu-signup h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 1rem;
+        }
+        .osu-signup p {
+            color: #94a3b8;
+            font-size: 0.97rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        .osu-signup-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.97rem;
+            padding: 0.85rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+        }
+        .osu-signup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(124,58,237,0.5);
+        }
+    </style>
 </head>
 
 <body>
@@ -100,61 +306,69 @@
     </nav>
 
     <main>
-        <!-- Hero Section -->
-        <section class="programs-hero-section">
-            <div class="programs-hero-container">
-                <h1 class="programs-hero-title">Our Programs</h1>
-                <p class="programs-hero-subtitle">What can we do for you?</p>
-            </div>
-        </section>
+        <div class="osu-page">
 
-        <!-- Subtitle Section -->
-        <section class="programs-subtitle-section">
-            <h2 class="programs-subtitle">What can we do for you?</h2>
-        </section>
-
-        <!-- Programs Grid Section -->
-        <section class="programs-grid-section">
-            <div class="programs-grid-container">
-                
-                <!-- Program 1: AIR Project K -->
-                <div class="program-box">
-                    <h3 class="program-title">AIR Project K</h3>
-                    <ul class="program-list">
-                        <li>Transparency first AI software</li>
-                        <li>Backed by real research</li>
-                        <li>Developed with teachers in mind</li>
-                        <li>No Learning Curve</li>
-                    </ul>
-                    <a href="air-project-k.html" class="program-button">Learn More</a>
+            <!-- ── Hero ── -->
+            <section class="osu-hero">
+                <div class="osu-hero-inner">
+                    <div class="osu-hero-badge">New Collaboration</div>
+                    <h1 class="osu-hero-title">
+                        <span class="highlight-purple">AIRethought</span>
+                        <br>×<br>
+                        <span class="highlight-orange">OSU's Oregon Broadband Equity Coalition</span>
+                    </h1>
+                    <div class="osu-hero-divider">
+                        <span></span>
+                        <em>Bridging the digital divide through AI education</em>
+                        <span></span>
+                    </div>
+                    <p class="osu-hero-subtitle">
+                        Together, we're working to ensure every student and educator across Oregon has access to the AI literacy resources they need to thrive in a digital future.
+                    </p>
                 </div>
+            </section>
 
-                <!-- Program 2: AIR AI Certification -->
-                <div class="program-box">
-                    <h3 class="program-title">AIR AI Certification</h3>
-                    <ul class="program-list">
-                        <li>Learn about AI in educational</li>
-                        <li>8 week course</li>
-                        <li>Free sign up with real certifications</li>
-                        <li>Learn about AI from experts</li>
-                    </ul>
-                    <a href="ai-certification.html" class="program-button">Learn More</a>
+            <!-- ── Two-column: image + text ── -->
+            <section class="osu-collab">
+                <div class="osu-collab-inner">
+                    <div class="osu-collab-header">
+                        <h2>Bringing AI to <span>Every District in Oregon</span></h2>
+                        <p>A joint initiative to close the broadband and AI literacy gap statewide</p>
+                    </div>
+                    <div class="osu-collab-grid">
+                        <!-- Left: image placeholder -->
+                        <div class="osu-collab-image">
+                            <img src="./images/osu.svg" alt="Oregon State University Oregon Broadband Equity Coalition">
+                        </div>
+                        <!-- Right: text -->
+                        <div class="osu-collab-text">
+                            <h3>Why This Partnership Matters</h3>
+                            <p>
+                                Oregon's rural and underserved communities face a compounding challenge — limited broadband access and a lack of AI literacy resources. Through this collaboration, AIRethought and OSU's Oregon Broadband Equity Coalition are combining expertise to directly address both.
+                            </p>
+                            <p>
+                                Our joint program deploys student-led AI literacy workshops into districts that have historically been left behind, giving teachers the tools and confidence to guide their students through the rapidly evolving AI landscape.
+                            </p>
+                            <p>
+                                From the coast to eastern Oregon, no district will be left behind.
+                            </p>
+                        </div>
+                    </div>
                 </div>
+            </section>
 
-                <!-- Program 3: AI Policy Development -->
-                <div class="program-box">
-                    <h3 class="program-title">AI Policy Development</h3>
-                    <ul class="program-list">
-                        <li>Receive assistance on AI policy</li>
-                        <li>Work with an experienced team</li>
-                        <li>Implement proven strategies</li>
-                        <li>Create ethical + effective guidelines</li>
-                    </ul>
-                    <a href="policy-development.html" class="program-button">Learn More</a>
+            <!-- ── Sign-up ── -->
+            <section class="osu-signup">
+                <div class="osu-signup-inner">
+                    <h2>Get Involved</h2>
+                    <p>
+                        Whether you're a teacher, school administrator, or community member — there's a place for you in this initiative. Sign up to learn more and be the first to know when we launch in your district.
+                    </p>
+                    <a href="https://oregonbroadbandequity.org/aok-events" target="_blank" rel="noopener noreferrer" class="osu-signup-btn">Sign Up to Learn More →</a>
                 </div>
+            </section>
 
-            </div>
-        </section>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -206,6 +420,7 @@
                         <li><a href="air-project-k.html">AIR Project K</a></li>
                         <li><a href="ai-certification.html">AI Certification</a></li>
                         <li><a href="policy-development.html">Policy Development</a></li>
+                        <li><a href="airxosu.html">AIR x OSU</a></li>
                         <li><a href="teachers.html">For Teachers</a></li>
                         <li><a href="students.html">For Students</a></li>
                         <li><a href="schools-involved.html">For Schools</a></li>
@@ -220,7 +435,7 @@
                         <input type="email" name="email" placeholder="Enter your email" class="newsletter-input" required>
                         <button type="submit" class="newsletter-button">Subscribe</button>
                     </form>
-                    
+
                     <div class="footer-contact">
                         <h4 class="footer-heading">Contact</h4>
                         <p class="contact-item">
@@ -241,17 +456,16 @@
     </footer>
 
     <script>
+        // Mobile Menu Toggle
         const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
         const navMenu = document.querySelector('.nav-menu');
         const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
-        // Toggle mobile menu
         mobileMenuToggle.addEventListener('click', () => {
             mobileMenuToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
 
-        // Handle dropdown clicks on mobile - prevent navigation and show dropdown
         dropdownToggles.forEach(toggle => {
             toggle.addEventListener('click', (e) => {
                 if (window.innerWidth <= 1024) {
@@ -259,11 +473,9 @@
                     const dropdown = toggle.closest('.nav-dropdown');
                     dropdown.classList.toggle('active');
                 }
-                // On desktop, clicking the link will navigate to the page
             });
         });
 
-        // Close mobile menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.navbar')) {
                 navMenu.classList.remove('active');
@@ -271,11 +483,47 @@
             }
         });
 
-        // Close mobile menu on window resize
         window.addEventListener('resize', () => {
             if (window.innerWidth > 1024) {
                 navMenu.classList.remove('active');
                 mobileMenuToggle.classList.remove('active');
+            }
+        });
+
+        // Newsletter Form
+        const newsletterForm = document.querySelector('.footer-newsletter-form');
+
+        newsletterForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitButton = newsletterForm.querySelector('.newsletter-button');
+            const emailInput = newsletterForm.querySelector('.newsletter-input');
+            const originalButtonText = submitButton.textContent;
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Subscribing...';
+
+            try {
+                const formData = new FormData(newsletterForm);
+                const response = await fetch(newsletterForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    emailInput.value = '';
+                    submitButton.textContent = 'Subscribed!';
+                } else {
+                    submitButton.textContent = 'Error. Try again.';
+                }
+            } catch (error) {
+                submitButton.textContent = 'Error. Try again.';
+            } finally {
+                setTimeout(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                }, 3000);
             }
         });
     </script>

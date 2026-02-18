@@ -7,6 +7,44 @@
     <link rel="icon" href="./images/favicon.png" type="image/x-icon">
     <link href="./css/navbar.css" rel="stylesheet">
     <link href="./css/homepage.css" rel="stylesheet">
+    <style>
+        .announcement-bar {
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            text-align: center;
+            padding: 7px 16px;
+            font-size: 0.78rem;
+            letter-spacing: 0.01em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-top: 72px;
+            position: relative;
+            z-index: 10;
+        }
+        .announcement-bar a.announcement-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            background: rgba(255,255,255,0.12);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .announcement-bar a.announcement-arrow:hover {
+            background: rgba(255,255,255,0.28);
+        }
+        .announcement-bar a.announcement-arrow svg {
+            width: 12px;
+            height: 12px;
+        }
+    </style>
 </head>
 
 <body>
@@ -72,6 +110,7 @@
                         <a href="air-project-k.html" class="dropdown-link">AIR Project K</a>
                         <a href="ai-certification.html" class="dropdown-link">AIR AI Certification</a>
                         <a href="policy-development.html" class="dropdown-link">AI Policy Development</a>
+                        <a href="airxosu.html" class="dropdown-link">AIR x OSU</a>
                     </div>
                 </div>
 
@@ -98,6 +137,16 @@
     </nav>
 
     <main>
+
+        <!-- Announcement Bar -->
+        <div class="announcement-bar">
+            <span>✨ Check out our new collaboration with Oregon State University's Oregon Broad Band Equity Coalition!</span>
+            <a href="/airxosu" class="announcement-arrow" aria-label="Learn more">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
             
             <!-- Hero Section -->
             <section class="hero-section">
